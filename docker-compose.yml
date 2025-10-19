@@ -1,0 +1,10 @@
+services:
+  protocolo:
+    build:
+      context: .
+      dockerfile: Dockerfile.protocolo
+    working_dir: /projeto-protocolo
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/projeto-protocolo
