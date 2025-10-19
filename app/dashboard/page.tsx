@@ -1,11 +1,13 @@
 'use client'
 
 import React, { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import Card from '@/components/ui/Card'
 import Button from '@/components/ui/Button'
 import Chip from '@/components/ui/Chip'
 
 interface Patient {
+  id: string
   cpf: string
   name: string
   conditions: string[]
@@ -14,6 +16,7 @@ interface Patient {
 
 const mockPatients: Patient[] = [
   {
+    id: '1',
     cpf: '123.456.789-12',
     name: 'Pedro Henrique',
     conditions: ['Diabetes', 'Hipertensão'],
@@ -24,6 +27,7 @@ const mockPatients: Patient[] = [
     ]
   },
   {
+    id: '2',
     cpf: '987.654.321-00',
     name: 'Maria Silva',
     conditions: ['Hipertensão'],
@@ -35,6 +39,7 @@ const mockPatients: Patient[] = [
 ]
 
 export default function DashboardPage() {
+  const router = useRouter()
   const [cpf, setCpf] = useState('')
   const [foundPatient, setFoundPatient] = useState<Patient | null>(null)
   const [isSearching, setIsSearching] = useState(false)
@@ -105,10 +110,10 @@ export default function DashboardPage() {
                       ))}
                     </div>
                   </div>
-                  <Button 
-                    variant="secondary" 
+                  <Button
+                    variant="secondary"
                     size="sm"
-                    onClick={() => window.location.href = `/dashboard/paciente/1`}
+                    onClick={() => router.push(`/dashboard/paciente/${foundPatient.id}`)}
                   >
                     Ver Perfil
                   </Button>
@@ -142,6 +147,72 @@ export default function DashboardPage() {
           </div>
         </Card>
       </div>
+
+      {/* Métricas Adicionais */}
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
+        <Card>
+          <div className="text-center">
+            <div className="text-3xl font-bold text-pague-blue mb-2">12</div>
+            <p className="text-gray-600">Atendimentos do Dia</p>
+          </div>
+        </Card>
+
+        <Card>
+          <div className="text-center">
+            <div className="text-3xl font-bold text-green-600 mb-2">38</div>
+            <p className="text-gray-600">Pacientes Ativos</p>
+          </div>
+        </Card>
+
+        <Card>
+          <div className="text-center">
+            <div className="text-3xl font-bold text-yellow-600 mb-2">8</div>
+            <p className="text-gray-600">Consultas na Semana</p>
+          </div>
+        </Card>
+
+        <Card>
+          <div className="text-center">
+            <div className="text-3xl font-bold text-red-600 mb-2">3</div>
+            <p className="text-gray-600">Protocolos Pendentes</p>
+          </div>
+        </Card>
+      </div>
+
+      {/* Pacientes Recentes */}
+      <Card title="Pacientes Recentes">
+        <div className="space-y-3">
+          {mockPatients.slice(0, 3).map((patient, index) => (
+            <div key={patient.id} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+              <div className="flex items-center space-x-4">
+                <div className="w-10 h-10 bg-pague-blue rounded-full flex items-center justify-center text-white font-bold">
+                  {patient.name.split(' ').map(n => n[0]).join('')}
+                </div>
+                <div>
+                  <h3 className="font-semibold text-gray-900">{patient.name}</h3>
+                  <p className="text-gray-600 text-sm">{patient.cpf}</p>
+                </div>
+              </div>
+              <div className="flex items-center space-x-2">
+                <div className="flex flex-wrap gap-1">
+                  {patient.conditions.slice(0, 2).map((condition, idx) => (
+                    <Chip key={idx} variant="warning" size="sm">
+                      {condition}
+                    </Chip>
+                  ))}
+                </div>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => router.push(`/dashboard/paciente/${patient.id}`)}
+                >
+                  Ver →
+                </Button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </Card>
     </div>
   )
 }

@@ -1,4 +1,7 @@
+'use client'
+
 import React from 'react'
+import { useRouter } from 'next/navigation'
 import Card from '@/components/ui/Card'
 import Button from '@/components/ui/Button'
 import Chip from '@/components/ui/Chip'
@@ -34,7 +37,15 @@ const mockPatient: Patient = {
 }
 
 export default function PatientProfilePage({ params }: { params: Promise<{ id: string }> }) {
+  const router = useRouter()
   const patient = mockPatient
+  const [patientId, setPatientId] = React.useState<string>('')
+
+  React.useEffect(() => {
+    params.then((resolvedParams) => {
+      setPatientId(resolvedParams.id)
+    })
+  }, [params])
 
   return (
     <div className="p-6 space-y-6">
@@ -137,11 +148,12 @@ export default function PatientProfilePage({ params }: { params: Promise<{ id: s
 
       {/* Botão Principal */}
       <div className="flex justify-center pt-6">
-        <Button 
-          variant="primary" 
+        <Button
+          variant="primary"
           size="lg"
-          onClick={() => window.location.href = `/dashboard/paciente/${params}/anamnese`}
+          onClick={() => patientId && router.push(`/dashboard/paciente/${patientId}/anamnese`)}
           className="px-8 py-4 text-lg"
+          disabled={!patientId}
         >
           🩺 Iniciar Atendimento
         </Button>

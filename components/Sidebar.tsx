@@ -43,7 +43,7 @@ export default function Sidebar({ activeTab, onTabChange, userType }: SidebarPro
           </div>
         </div>
       </div>
-      
+
       {/* Navigation */}
       <nav className="flex-1 px-4 py-6">
         <ul className="space-y-2">
@@ -51,11 +51,10 @@ export default function Sidebar({ activeTab, onTabChange, userType }: SidebarPro
             <li key={item.id}>
               <button
                 onClick={() => onTabChange(item.id)}
-                className={`w-full flex items-center px-4 py-3 rounded-xl text-left transition-all duration-200 ${
-                  activeTab === item.id
+                className={`w-full flex items-center px-4 py-3 rounded-xl text-left transition-all duration-200 ${activeTab === item.id
                     ? 'bg-white bg-opacity-20 text-white shadow-lg'
                     : 'text-blue-100 hover:bg-white hover:bg-opacity-10 hover:text-white'
-                }`}
+                  }`}
               >
                 <span className="text-lg mr-3">{item.icon}</span>
                 <span className="font-medium">{item.label}</span>
@@ -64,11 +63,11 @@ export default function Sidebar({ activeTab, onTabChange, userType }: SidebarPro
           ))}
         </ul>
       </nav>
-      
+
       {/* Footer */}
       <div className="p-4 border-t border-blue-700">
         <div className="text-blue-200 text-xs text-center">
-          <p>© 2024 PagueMenos</p>
+          <p>© 2025 PagueMenos</p>
           <p>Sistema de Protocolos</p>
         </div>
       </div>

@@ -53,9 +53,11 @@ export default function LoginPage() {
           {/* Logo */}
           <div className="text-center mb-8">
             <div className="flex items-center justify-center mb-4">
-              <div className="w-12 h-12 bg-pague-red rounded-lg flex items-center justify-center mr-3">
-                <span className="text-white text-xl font-bold">+</span>
-              </div>
+              <img
+                src="/paguemenos_logo.png"
+                alt="Pague Menos"
+                className="h-12 w-auto mr-3"
+              />
               <h1 className="text-2xl font-bold text-gray-900">Pague Menos</h1>
             </div>
             <p className="text-gray-600">Acesse sua conta para continuar</p>
