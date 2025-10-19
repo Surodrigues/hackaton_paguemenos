@@ -2,9 +2,10 @@ services:
   protocolo:
     build:
       context: .
-      dockerfile: Dockerfile.protocolo
-    working_dir: /projeto-protocolo
+      dockerfile: Dockerfile
+    working_dir: /app
+    container_name: hackaton-pague-menos
     ports:
-      - "8080:80"
-    volumes:
-      - .:/projeto-protocolo
+      - "3000:3000"
+    command: ["npm", "start"]
+    
