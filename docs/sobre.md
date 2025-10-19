@@ -1,0 +1,1 @@
+Esse projeto, estamos criando uma plataforma voltada para o farmaceutico saber o que prescrever de acordo com o protocolo. onde o farmaceutico ira identificar o cliete atraves do cpf e guardar esses dados como, nome, cpf, o que esta sentindo,  protocolo. 
